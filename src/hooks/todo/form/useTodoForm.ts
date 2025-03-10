@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import instance from "@/apis/apiClient";
-import { UpdateTodoBodyDto } from "@/types/types";
+import { uploadFile } from "@/apis/fileApi";
+import useToast from "@/hooks/useToast";
+import { TodoResponseDto, UpdateTodoBodyDto } from "@/types/types";
 
-export function useTodoForm(isUpdate: boolean = false) {
+interface TodoFormOptions {
+  isUpdate?: boolean;
+  todo?: TodoResponseDto;
+  goalId?: number;
+}
+
+export function useTodoForm({ isUpdate, todo, goalId }: TodoFormOptions) {
+  const { addToast } = useToast();
   const formMethods = useForm<UpdateTodoBodyDto>();
-  const { setValue } = formMethods;
+  const { reset, setValue } = formMethods;
 
   const [isDone, setIsDone] = useState(false);
   const [isFileCheck, setIsFileCheck] = useState(true);
@@ -16,18 +24,32 @@ export function useTodoForm(isUpdate: boolean = false) {
   const handleFileChange = async (files: FileList) => {
     if (files.length > 0) {
       const file = files[0];
-      const formData = new FormData();
-      formData.append("file", file);
       try {
-        const response = await instance.post("files", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-        setValue("fileUrl", response.data.url);
+        const response = await uploadFile(file);
+        setValue("fileUrl", response.url);
       } catch (error) {
-        console.error("파일 업로드 오류:", error);
+        addToast({
+          variant: "error",
+          content: "파일 업로드에 실패했습니다.",
+        });
       }
     }
   };
+
+  useEffect(() => {
+    if (todo) {
+      reset(todo);
+      setIsDone(todo.done || false);
+
+      if (todo.fileUrl) setValue("fileUrl", todo.fileUrl);
+      setIsFileCheck(!!todo.fileUrl);
+      if (todo.linkUrl) setSelectedInput("link");
+      setIsLinkCheck(!!todo.linkUrl);
+      if (todo.goal?.id) setValue("goalId", todo.goal.id);
+    } else if (!isUpdate && goalId) {
+      setValue("goalId", goalId);
+    }
+  }, [todo, goalId, isUpdate]);
 
   const onSubmit = (
     data: UpdateTodoBodyDto,
