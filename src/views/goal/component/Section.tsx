@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 interface Container {
   children: ReactNode;
   className?: string;

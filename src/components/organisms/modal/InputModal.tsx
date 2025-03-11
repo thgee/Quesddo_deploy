@@ -18,7 +18,7 @@ import PlusIcon from "@/components/atoms/plus-icon/PlusIcon";
 import { useModalContext } from "@/contexts/InputModalContext";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useFilePreview from "@/hooks/useFilePreview";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import ClosePopup from "@/views/todo/popup/ClosePopup";
 import { TodoCheckImg } from "@/views/todo/todo-checkbox/TodoCheckImg";
 

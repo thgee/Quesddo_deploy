@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import Spinner from "@/components/atoms/spinner/Spinner";
 import TodoList from "@/components/organisms/todo-list/TodoList";
 import { useInfiniteTodo } from "@/hooks/todo/useInfiniteTodo";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 export const FILTER_TYPES = ["All", "Done", "To do"] as const;
 

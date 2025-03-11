@@ -5,7 +5,7 @@ import Spinner from "@/components/atoms/spinner/Spinner";
 import ErrorFallback from "@/components/molecules/error-fallback/ErrorFallback";
 import { useCreateGoal } from "@/hooks/goal/useCreateGoal";
 import useToast from "@/hooks/useToast";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 import AddButton from "../AddButton";
 import MenuItem from "../MenuItem";

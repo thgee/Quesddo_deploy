@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { API_BACKEND_URL } from "@/constants/env";
 import { ErrorResponsePayload } from "@/types/types";
-import { tokenUtils } from "@/utils/tokenUtils";
+import { tokenUtils } from "@/utils/tokenUtils/tokenUtils";
 
 import refreshTokens from "./apiRefreshTokens";
 import type { AxiosError, AxiosInstance } from "axios";

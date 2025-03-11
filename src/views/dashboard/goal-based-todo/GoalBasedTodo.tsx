@@ -40,7 +40,7 @@ export default function GoalBasedTodo({
     <section className="rounded-xl bg-white p-6 transition-shadow duration-300 hover:shadow-2xl">
       {/* 목표별 할 일 타이틀 */}
       <TitleWithIcon
-        title="목표 별 할 일"
+        title="목표별 할 일"
         imgUrl="/icons/flag-box.png"
         gap={8}
         className="text-lg font-semibold"

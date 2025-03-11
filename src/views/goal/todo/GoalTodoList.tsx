@@ -43,7 +43,7 @@ export default function GoalTodoList({
           className="flex items-center gap-1 text-sm font-semibold text-blue-500"
         >
           <PlusIcon width={16} height={16} />
-          할일 추가
+          할일추가
         </button>
       </div>
       <div className="h-[168px] overflow-x-hidden overflow-y-auto pr-4 md:h-[512px]">

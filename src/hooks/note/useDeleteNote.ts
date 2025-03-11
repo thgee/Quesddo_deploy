@@ -4,14 +4,14 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import { deleteNote } from "@/apis/note/deleteNote";
+import noteApi from "@/apis/noteApi";
 import { TeamIdNotesGet200Response } from "@/types/types";
 
 export const useDeleteNote = (goalId: number) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (noteId: number) => deleteNote(noteId),
+    mutationFn: (noteId: number) => noteApi.deleteNote(noteId),
 
     onMutate: async (noteId: number) => {
       await queryClient.cancelQueries({ queryKey: ["notes", goalId] });

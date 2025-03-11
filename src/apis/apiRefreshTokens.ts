@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { tokenUtils } from "@/utils/tokenUtils";
+import { tokenUtils } from "@/utils/tokenUtils/tokenUtils";
 
 export default async function refreshTokens() {
   try {

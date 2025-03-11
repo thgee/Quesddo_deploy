@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { ReactElement, useEffect, useState } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 export const toastVariants = cva(
   "pointer-events-auto data-[state=open]:animate-toast-open data-[state=close]:animate-toast-close mx-10 mb-4 flex items-center gap-2 px-6 py-3 text-sm font-semibold first:mb-10",

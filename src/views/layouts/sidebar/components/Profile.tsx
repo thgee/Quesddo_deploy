@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { memo } from "react";
 
 import { useFetchUser } from "@/hooks/user/useFetchUser";
-import { tokenUtils } from "@/utils/tokenUtils";
+import { tokenUtils } from "@/utils/tokenUtils/tokenUtils";
 
 export default memo(function Profile() {
   const router = useRouter();

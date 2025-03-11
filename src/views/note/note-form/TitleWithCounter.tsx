@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 
 import TextCounting from "@/components/atoms/text-counting/TextCounting";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 const MAX_TITLE_COUNT = 30;
 

@@ -70,7 +70,7 @@ export default function DraftNoteReminderToast({
             <button onClick={handleCloseToast} className="group shrink-0">
               <img
                 className="group-hover:brightness-[90%] group-hover:contrast-[150%]"
-                src="/icons/delete_circle.png"
+                src="/icons/delete-circle.png"
                 alt="삭제"
                 width={24}
                 height={24}

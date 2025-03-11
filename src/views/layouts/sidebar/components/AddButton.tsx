@@ -2,7 +2,7 @@ import { HTMLAttributes, memo } from "react";
 
 import Button from "@/components/atoms/button/Button";
 import PlusIcon from "@/components/atoms/plus-icon/PlusIcon";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 interface ButtonPlusIconProps extends HTMLAttributes<HTMLButtonElement> {
   size?: "default" | "xs";

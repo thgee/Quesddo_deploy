@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { fetchNoteDetail } from "@/apis/note/fetchNoteDetail";
+import noteApi from "@/apis/noteApi";
 import Divider from "@/components/atoms/divider/Divider";
 import GoalItem from "@/components/atoms/goal-item/GoalItem";
 import TodoChip from "@/components/atoms/todo-chip/TodoChip";
@@ -19,7 +19,7 @@ export default function NoteDetailContent({ noteId }: NoteDetailContentProps) {
 
   const { data } = useSuspenseQuery({
     queryKey: ["noteDetail", noteId],
-    queryFn: () => fetchNoteDetail(noteId),
+    queryFn: () => noteApi.fetchNoteDetail(noteId),
   });
   return (
     <>

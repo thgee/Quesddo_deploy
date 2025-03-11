@@ -1,7 +1,7 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
 
 import PageTitle from "@/components/atoms/page-title/PageTitle";
+import QuesddoHead from "@/components/atoms/quesddo-head/QuesddoHead";
 import { GoalDetailProvider } from "@/contexts/GoalDetailContext";
 import GoalHeader from "@/views/goal/header/GoalHeader";
 import GoalNote from "@/views/goal/note/GoalNote";
@@ -13,9 +13,8 @@ export default function GoalDetailPage() {
 
   return (
     <GoalDetailProvider goalId={goalId}>
-      <Head>
-        <title>{goalId}</title>
-      </Head>
+      <QuesddoHead title="목표" />
+
       <div className="smd:pl-[360px] box-border h-full bg-slate-100 px-[16px] pt-[64px] sm:pt-[24px] sm:pr-[24px] sm:pl-[84px]">
         <div className="flex max-w-[1200px] flex-col gap-[16px]">
           {/* 목표 */}

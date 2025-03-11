@@ -1,4 +1,4 @@
-import On from "@public/visibility_on.png";
+import On from "@public/icons/visibility-on.png";
 import Image from "next/image";
 import React, {
   createContext,
@@ -11,7 +11,7 @@ import { useFormContext } from "react-hook-form";
 
 import Input from "@/components/atoms/input/Input";
 import { SignField } from "@/types/Sign";
-import Off from "@public/visibility_off.png";
+import Off from "@public/icons/visibility-off.png";
 
 interface SignInputContextProps extends SignField {
   children: ReactNode;

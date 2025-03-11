@@ -46,7 +46,7 @@ export default function GoalItem({
           onClick={handleClickAddTodo}
         >
           <PlusIcon width={16} height={16} />
-          <span className="text-sm font-semibold">할 일 추가</span>
+          <span className="text-sm font-semibold">할일추가</span>
         </button>
       </div>
 
@@ -76,7 +76,7 @@ export default function GoalItem({
           자세히 보기
         </span>
         <Image
-          src="/icons/ic_arrow_right.svg"
+          src="/icons/arrow-right.svg"
           alt={"arrow_right"}
           width={20}
           height={20}

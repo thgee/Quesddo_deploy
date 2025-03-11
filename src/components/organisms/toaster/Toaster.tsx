@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 import Toast from "./Toast";
 import { ToastStateContext, ToastStateProps } from "./ToastProvider";

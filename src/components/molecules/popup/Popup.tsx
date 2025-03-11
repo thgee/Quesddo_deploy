@@ -1,6 +1,6 @@
 import Button from "@/components/atoms/button/Button";
 import ExitBtn from "@/components/atoms/exit-btn/ExitBtn";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 interface PopupProps {
   onClose: () => void;

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 interface ExitBtnProps {
   onClick: () => void;

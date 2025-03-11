@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { AnimatePresence, motion } from "framer-motion";
 import { CSSProperties, Dispatch, SetStateAction } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import type { Variants } from "framer-motion";
 
 // 애니메이션 설정

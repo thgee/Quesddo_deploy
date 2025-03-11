@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 import InputDropdownItem from "./InputDropdownItem";
 

@@ -1,5 +1,5 @@
 import Button from "@/components/atoms/button/Button";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 interface ToastActionButtonProps {
   content: string;

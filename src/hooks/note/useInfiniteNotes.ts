@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { fetchNotes } from "@/apis/note/fetchNotes";
+import noteApi from "@/apis/noteApi";
 import { TeamIdNotesGet200Response } from "@/types/types";
 
 export const useInfiniteNotes = (goalId: number) => {
@@ -15,7 +15,10 @@ export const useInfiniteNotes = (goalId: number) => {
   >({
     queryKey: ["notes", goalId],
     queryFn: ({ pageParam }) =>
-      fetchNotes({ pageParam: pageParam as number | undefined, goalId }),
+      noteApi.fetchNotes({
+        pageParam: pageParam as number | undefined,
+        goalId,
+      }),
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     initialPageParam: undefined,
     enabled: !!goalId,

@@ -1,4 +1,4 @@
-import logo from "@public/img_logo.png";
+import logo from "@public/icons/logo-lg.png";
 import type { Meta, StoryFn } from "@storybook/react";
 import Image from "next/image";
 import Link from "next/link";

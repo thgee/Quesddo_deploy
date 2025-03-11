@@ -6,7 +6,7 @@ import Spinner from "@/components/atoms/spinner/Spinner";
 import TitleWithIcon from "@/components/atoms/title-with-icon/TitleWithIcon.tsx";
 import TodoList from "@/components/organisms/todo-list/TodoList";
 import { useTodos } from "@/hooks/todo/useTodos";
-import arrowRight from "@public/icons/ic_arrow_right.svg";
+import arrowRight from "@public/icons/arrow-right.svg";
 
 interface RecentTodoProps {
   handleToggleTodo: (todoId: number, isDone: boolean) => void;

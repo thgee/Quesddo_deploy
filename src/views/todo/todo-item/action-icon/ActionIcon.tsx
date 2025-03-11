@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 
 import ActionDropdown from "@/components/atoms/action-dropdown/ActionDropdown";
 import { TodoResponse } from "@/types/todo";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 interface ActionIconProps {
   todo: TodoResponse["todos"][number];

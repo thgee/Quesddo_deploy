@@ -4,7 +4,7 @@ import TextCounting from "@/components/atoms/text-counting/TextCounting";
 import InputModal from "@/components/organisms/modal/InputModal";
 import { useInfiniteGoals } from "@/hooks/goal/useInfiniteGoals";
 import { UpdateTodoBodyDto } from "@/types/types";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 import TodoUpdateFormCheckbox from "../todo-checkbox/TodoUpdateFormCheckbox";
 import ValidateMassage from "./ValidateMassage";

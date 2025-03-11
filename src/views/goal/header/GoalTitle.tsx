@@ -8,7 +8,7 @@ import { useGoalDetailContext } from "@/contexts/GoalDetailContext";
 import { useDeleteGoal } from "@/hooks/goal/useDeleteGoal";
 import { useFetchGoal } from "@/hooks/goal/useFetchGoal";
 import { useUpdateGoal } from "@/hooks/goal/useUpdateGoal";
-import meatBalls from "@public/icons/meatballs_menu.svg";
+import meatBalls from "@public/icons/meatballs-menu.svg";
 
 import Modal from "../component/Modal";
 

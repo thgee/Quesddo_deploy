@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 
 import instance from "@/apis/apiClient";
 import { UserCreateRequstDto } from "@/types/types";
-import { tokenUtils } from "@/utils/tokenUtils";
+import { tokenUtils } from "@/utils/tokenUtils/tokenUtils";
 
 interface FormData extends UserCreateRequstDto {
   confirmPassword: string;

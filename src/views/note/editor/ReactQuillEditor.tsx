@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { ForwardedRef } from "react";
 import ReactQuill from "react-quill-new";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 interface ReactQuillNewProps extends ReactQuill.ReactQuillProps {
   forwardedRef?: ForwardedRef<ReactQuill>;

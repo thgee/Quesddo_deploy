@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 import CloseSidebarLink from "./CloseSidebarLink";
 
@@ -20,14 +20,14 @@ export default function SidebarHeader({
     >
       <CloseSidebarLink href="/">
         <img
-          src="/icons/logo-horizontal.png"
+          src="/icons/logo-lg.png"
           alt="로고_horizontal"
           width={106}
           height={35}
           className={cn(!isOpen && "hidden")}
         />
         <img
-          src="/icons/logo.png"
+          src="/icons/logo-sm.png"
           alt="로고"
           width={32}
           height={32}

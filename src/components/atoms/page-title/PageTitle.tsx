@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 interface PageTitleProps
   extends Omit<HTMLAttributes<HTMLHeadingElement>, "children"> {

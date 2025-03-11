@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { TodoResponse } from "@/types/todo";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 import { TodoCheckbox } from "../todo-checkbox/TodoCheckbox";
 import { ActionIcon } from "./action-icon/ActionIcon";

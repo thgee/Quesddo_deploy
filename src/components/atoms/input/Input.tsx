@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 const inputVariants = cva(
   "box-border inline-block px-[24px] py-[12px] rounded-[12px] bg-slate-50 text-slate-800 font-normal placeholder:text-slate-400 focus:outline-none focus:border focus:border-blue-500 hover:border-blue-300",

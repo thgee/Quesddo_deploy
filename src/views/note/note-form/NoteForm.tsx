@@ -3,9 +3,9 @@ import { FormProvider, type Path, type UseFormReturn } from "react-hook-form";
 
 import Button from "@/components/atoms/button/Button";
 import PageTitle from "@/components/atoms/page-title/PageTitle";
-import EmbeddedContent from "@/components/organisms/note-detail/components/EmbeddedContent";
 import useAutoSaveNoteDraft from "@/hooks/note/useAutoSaveNoteDraft";
 import { CreateNoteBodyDto, UpdateNoteBodyDto } from "@/types/types";
+import EmbeddedContent from "@/views/note/note-detail/components/EmbeddedContent";
 import DraftNoteReminderToast from "@/views/note/note-form/DraftNoteReminderToast";
 import Editor from "@/views/note/note-form/Editor";
 import TitleWithCounter from "@/views/note/note-form/TitleWithCounter";
