@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 import noteApi from "@/apis/noteApi";
-import useNoteStorage from "@/hooks/note/useNoteStorage";
-import useUpdateNote from "@/hooks/note/useUpdateNote";
+import { useNoteStorage } from "@/hooks/note/useNoteStorage";
+import { useUpdateNote } from "@/hooks/note/useUpdateNote";
 import { UpdateNoteBodyDto } from "@/types/types";
 
 import NoteForm from "./NoteForm";
