@@ -16,7 +16,7 @@ export default function NotesPage() {
 
   return (
     <div className="min-h-screen bg-slate-100">
-      <div className="flex max-w-[792px] flex-col gap-4 p-4 sm:pl-[84px] md:pl-[360px]">
+      <div className="smd:pl-[360px] flex max-w-[792px] flex-col gap-4 p-4 sm:pl-[84px]">
         <h1 className="text-lg font-semibold text-slate-900">노트 모아보기</h1>
 
         {hasNotes ? (

@@ -26,7 +26,7 @@ export default function NoteDetail() {
         onClick={(e) => e.stopPropagation()}
         className="box-border flex h-full w-full flex-col gap-4 border-l border-slate-200 bg-white p-4 break-words whitespace-pre-wrap sm:w-[512px] md:w-[800px] md:p-6"
       >
-        <ExitBtn onClick={handleCloseSidebar} />
+        <ExitBtn className="self-end" onClick={handleCloseSidebar} />
 
         {/* 내부 콘텐츠 부분만 Suspense로 감싸기 */}
         <Suspense fallback={<Spinner size={80} />}>

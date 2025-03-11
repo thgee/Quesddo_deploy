@@ -16,7 +16,7 @@ export default function GoalDetailPage() {
       <Head>
         <title>{goalId}</title>
       </Head>
-      <div className="box-border h-full bg-slate-100 px-[16px] pt-[64px] sm:pt-[24px] sm:pr-[24px] sm:pl-[84px] md:pl-[360px]">
+      <div className="smd:pl-[360px] box-border h-full bg-slate-100 px-[16px] pt-[64px] sm:pt-[24px] sm:pr-[24px] sm:pl-[84px]">
         <div className="flex max-w-[1200px] flex-col gap-[16px]">
           {/* 목표 */}
           <PageTitle title="목표" isMobileFixed={true} />
