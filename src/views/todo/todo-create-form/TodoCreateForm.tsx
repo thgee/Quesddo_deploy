@@ -4,7 +4,7 @@ import { useCreateTodo } from "@/hooks/todo/useCreateTodo";
 import useToast from "@/hooks/useToast";
 import { UpdateTodoBodyDto } from "@/types/types";
 
-import { TodoForm } from "../TodoForm";
+import { TodoForm } from "../todo-form/TodoForm";
 
 export default function TodoCreateForm({ goalId }: { goalId?: number }) {
   const { addToast } = useToast();

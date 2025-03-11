@@ -3,13 +3,11 @@ import { FormProvider } from "react-hook-form";
 import TextCounting from "@/components/atoms/text-counting/TextCounting";
 import InputModal from "@/components/organisms/modal/InputModal";
 import { useInfiniteGoals } from "@/hooks/goal/useInfiniteGoals";
-import {
-  TeamIdGoalsGet200ResponseGoalsInner,
-  UpdateTodoBodyDto,
-} from "@/types/types";
+import { UpdateTodoBodyDto } from "@/types/types";
 import { cn } from "@/utils/cn";
 
-import TodoUpdateFormCheckbox from "./todo-checkbox/TodoUpdateFormCheckbox";
+import TodoUpdateFormCheckbox from "../todo-checkbox/TodoUpdateFormCheckbox";
+import ValidateMassage from "./ValidateMassage";
 import type { UseFormReturn } from "react-hook-form";
 
 interface TodoFormProps {
@@ -33,6 +31,8 @@ interface TodoFormProps {
   ) => void;
 }
 
+const MAX_TITLE_COUNT = 30;
+
 export function TodoForm({
   isUpdate,
   isDone,
@@ -48,10 +48,17 @@ export function TodoForm({
   handleTodoSubmit,
   onSubmit,
 }: TodoFormProps) {
-  const fetchGoalList = useInfiniteGoals({ size: 50, source: "todoForm" });
-  const goals = fetchGoalList.data?.goals || [];
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteGoals({ size: 10, source: "todoForm" });
+  const goals = data?.goals || [];
 
-  const { register, handleSubmit, watch, control } = formMethods;
+  const {
+    register,
+    handleSubmit,
+    watch,
+    control,
+    formState: { errors },
+  } = formMethods;
 
   const title = watch("title");
   const titleCounting = title?.length || 0;
@@ -93,9 +100,17 @@ export function TodoForm({
               <InputModal.TextInput
                 type="text"
                 placeholder="할 일의 제목을 적어주세요"
-                maxLength={30}
-                {...register("title", { required: true, maxLength: 30 })}
+                maxLength={MAX_TITLE_COUNT}
+                {...register("title", {
+                  required: true,
+                  maxLength: MAX_TITLE_COUNT,
+                  validate: (value) =>
+                    value?.trim() !== "" || "공백만 입력할 수 없습니다.",
+                })}
               />
+              {errors?.title?.message && (
+                <ValidateMassage message={errors.title.message.toString()} />
+              )}
             </div>
 
             <div>
@@ -142,6 +157,9 @@ export function TodoForm({
                 control={control}
                 dropdownItems={goals}
                 buttonText={"목표를 선택해주세요"}
+                fetchNextPage={fetchNextPage}
+                hasNextPage={hasNextPage}
+                isFetchingNextPage={isFetchingNextPage}
               ></InputModal.DropdownInput>
             </div>
 

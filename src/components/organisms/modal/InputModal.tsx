@@ -237,12 +237,18 @@ function DropdownInput<T extends FieldValues>({
   buttonText,
   name,
   control,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
   ...props
 }: {
   dropdownItems: { title: string; id: number }[];
   buttonText: string;
   name: Path<T>;
   control: Control<T>;
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
 }) {
   const {
     field: { onChange, value },
@@ -256,6 +262,9 @@ function DropdownInput<T extends FieldValues>({
       buttonText={buttonText}
       selectedItem={selectedItem}
       onSelect={(item) => onChange(item.id)}
+      fetchNextPage={fetchNextPage}
+      hasNextPage={hasNextPage}
+      isFetchingNextPage={isFetchingNextPage}
       {...props}
     />
   );
