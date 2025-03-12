@@ -1,8 +1,6 @@
-import { FormEventHandler, memo, Suspense, useRef, useState } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import { FormEventHandler, memo, useRef, useState } from "react";
 
-import Spinner from "@/components/atoms/spinner/Spinner";
-import ErrorFallback from "@/components/molecules/error-fallback/ErrorFallback";
+import BoundaryWrapper from "@/components/organisms/boundary-wrapper/BoundaryWrapper";
 import { useCreateGoal } from "@/hooks/goal/useCreateGoal";
 import useToast from "@/hooks/useToast";
 import { cn } from "@/utils/cn/cn";
@@ -35,13 +33,22 @@ export default memo(function MenuGoal() {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const title = formData.get("title") as string;
+    const toastStyle = "mx-0 box-border w-full px-3";
 
     if (!title) {
       setShowForm(false);
       return;
     }
 
-    const toastStyle = "mx-0 box-border w-full px-3";
+    if (title.trim() === "") {
+      addToast({
+        variant: "error",
+        content: "공백만 입력할 수 없습니다",
+        className: toastStyle,
+      });
+      return;
+    }
+
     const handleSuccess = () => {
       addToast({
         content: (
@@ -85,11 +92,9 @@ export default memo(function MenuGoal() {
         </AddButton>
       </div>
       <div className="flex min-h-0 flex-1 flex-col gap-6">
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <Suspense fallback={<Spinner size={60} />}>
-            <TabSideMenuList ref={ulRef} />
-          </Suspense>
-        </ErrorBoundary>
+        <BoundaryWrapper>
+          <TabSideMenuList ref={ulRef} />
+        </BoundaryWrapper>
         {showForm && <GoalCreationForm onSubmit={handleSubmit} />}
         <AddButton
           outline
