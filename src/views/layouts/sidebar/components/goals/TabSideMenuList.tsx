@@ -49,7 +49,9 @@ export default memo(
                 goalId={goal.id}
               />
             ))}
-            {data?.goals.length > 0 && <li ref={inViewRef}></li>}
+            {hasNextPage && !isFetchingNextPage && (
+              <li className="h-[20px]" ref={inViewRef}></li>
+            )}
           </>
         )}
       </ul>
