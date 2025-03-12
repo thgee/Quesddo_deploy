@@ -30,13 +30,11 @@ export default memo(
       root: ref && "current" in ref ? ref.current : null,
     });
 
-    const isFetchRequired = inView && hasNextPage && !isFetchingNextPage;
-
     useEffect(() => {
-      if (isFetchRequired) {
+      if (inView && hasNextPage && !isFetchingNextPage) {
         fetchNextPage();
       }
-    }, [isFetchRequired]);
+    }, [inView, hasNextPage, isFetchingNextPage]);
 
     return (
       <ul className="min-h-0 overflow-y-auto" ref={ref}>
