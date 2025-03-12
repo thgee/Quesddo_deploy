@@ -1,5 +1,5 @@
 import { FilterType } from "@/types/todo";
-import { TodoResponseDto } from "@/types/types";
+import { TodoResponseDto, UpdateTodoBodyDto } from "@/types/types";
 
 import instance from "./apiClient";
 
@@ -36,8 +36,29 @@ export const todoApi = {
     const { data } = await instance.get("/todos", { params });
     return data;
   },
+
   fetchProgress: async (goalId?: number) => {
     const res = await instance.get(`/todos/progress?goalId=${goalId ?? ""}`);
     return res.data;
   },
+
+  createTodo: async (body: UpdateTodoBodyDto): Promise<TodoResponseDto> => {
+    const { data } = await instance.post("/todos", body);
+    return data;
+  },
+
+  updateTodo: async (
+    todoId: number,
+    body: UpdateTodoBodyDto,
+  ): Promise<TodoResponseDto> => {
+    const { data } = await instance.patch(`/todos/${todoId}`, body);
+    return data;
+  },
+
+  deleteTodo: async (todoId: number) => {
+    const { data } = await instance.delete(`/todos/${todoId}`);
+    return data;
+  },
 };
+
+export default todoApi;
