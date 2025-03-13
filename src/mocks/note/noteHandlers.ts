@@ -3,7 +3,7 @@
 import { http, HttpResponse } from "msw";
 
 import { API_BACKEND_URL } from "@/constants/env";
-import { TeamIdNotesGet200ResponseNotesInner } from "@/types/types";
+import { CreateNoteBodyDto, UpdateNoteBodyDto } from "@/types/types";
 
 import { noteDetailMockData } from "./noteMockData";
 
@@ -12,5 +12,20 @@ export const noteHandlers = [
     if (!noteId) return;
     return HttpResponse.json(noteDetailMockData(Number(noteId)));
   }),
-  ,
+  http.post(
+    `${API_BACKEND_URL}notes`,
+    async ({ request }: { request: Request }) => {
+      const body: CreateNoteBodyDto = await request.json();
+
+      return HttpResponse.json(body);
+    },
+  ),
+  http.patch(
+    `${API_BACKEND_URL}notes/:noteId`,
+    async ({ request }: { request: Request }) => {
+      const body: UpdateNoteBodyDto = await request.json();
+
+      return HttpResponse.json(body);
+    },
+  ),
 ];

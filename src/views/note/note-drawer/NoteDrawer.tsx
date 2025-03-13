@@ -1,8 +1,8 @@
 import { useSearchParams } from "next/navigation";
 
 import NoteDetail from "../note-detail/NoteDetail";
-import NoteCreateForm from "../note-form/NoteCreateForm";
-import NoteUpdateForm from "../note-form/NoteUpdateForm";
+import NoteCreateForm from "../note-create-form/NoteCreateForm";
+import NoteUpdateForm from "../note-update-form/NoteUpdateForm";
 
 const MODE = {
   DETAIL: "detail",
