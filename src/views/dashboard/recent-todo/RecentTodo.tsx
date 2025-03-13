@@ -5,20 +5,11 @@ import { Suspense } from "react";
 import Spinner from "@/components/atoms/spinner/Spinner";
 import TitleWithIcon from "@/components/atoms/title-with-icon/TitleWithIcon.tsx";
 import TodoList from "@/components/organisms/todo-list/TodoList";
+import { useTodoListActionContext } from "@/contexts/TodoListActionContext";
 import { useTodos } from "@/hooks/todo/useTodos";
 import arrowRight from "@public/icons/arrow-right.svg";
 
-interface RecentTodoProps {
-  handleToggleTodo: (todoId: number, isDone: boolean) => void;
-  setSelectedTodoId: (id: number | null) => void;
-  onOpenDeletePopup: (todoId: number) => void;
-}
-
-export default function RecentTodo({
-  handleToggleTodo,
-  setSelectedTodoId,
-  onOpenDeletePopup,
-}: RecentTodoProps) {
+export default function RecentTodo() {
   const { data } = useTodos({ size: 5 });
   const router = useRouter();
   const handleShowAll = () => {
@@ -26,6 +17,9 @@ export default function RecentTodo({
   };
 
   const todos = data?.todos ?? [];
+  const hasTodos = data && data.todos.length > 0;
+
+  const { handleToggleTodo, onOpenDeletePopup } = useTodoListActionContext();
 
   return (
     <section className="mb-4 h-[218px] flex-1 rounded-xl bg-white p-4 transition-shadow duration-300 hover:shadow-2xl">
@@ -46,19 +40,18 @@ export default function RecentTodo({
       </div>
 
       <div className="h-full max-h-[154px] overflow-y-hidden">
-        {todos.length === 0 ? (
-          <div className="flex h-full items-center justify-center text-sm font-normal text-slate-500">
-            최근에 등록한 할 일이 없어요
-          </div>
-        ) : (
+        {hasTodos ? (
           <Suspense fallback={<Spinner size={60} />}>
             <TodoList
               data={todos}
               handleToggleTodo={handleToggleTodo}
-              setSelectedTodoId={setSelectedTodoId}
               onOpenDeletePopup={onOpenDeletePopup}
             />
           </Suspense>
+        ) : (
+          <div className="flex h-full items-center justify-center text-sm font-normal text-slate-500">
+            최근에 등록한 할 일이 없어요
+          </div>
         )}
       </div>
     </section>
