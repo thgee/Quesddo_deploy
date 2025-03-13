@@ -1,12 +1,10 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import todoApi from "@/apis/todoApi";
 import { useCreateNote } from "@/hooks/note/useCreateNote";
 import { useNoteStorage } from "@/hooks/note/useNoteStorage";
-import { queryKeys } from "@/query-keys";
+import { useFetchTodo } from "@/hooks/todo/useFetchTodo";
 import { CreateNoteBodyDto } from "@/types/types";
 
 import NoteForm from "./NoteForm";
@@ -15,24 +13,26 @@ interface NoteCreationFormProps {
   todoId: number;
 }
 
-export default function NoteCreationForm({ todoId }: NoteCreationFormProps) {
-  const methods = useForm<CreateNoteBodyDto>({
+export default function NoteCreateForm({ todoId }: NoteCreationFormProps) {
+  const { data } = useFetchTodo(todoId);
+  const methods = useForm({
     defaultValues: {
       title: "",
       todoId,
       content: "",
       linkUrl: undefined,
+      goal: data?.goal?.title,
+      todo: {
+        title: data?.title,
+        done: data?.done,
+      },
     },
     mode: "onChange",
   });
+
   const mutation = useCreateNote();
   const pathname = usePathname();
   const router = useRouter();
-
-  const { data } = useSuspenseQuery({
-    queryKey: queryKeys.todo.editNote(todoId).queryKey,
-    queryFn: () => todoApi.fetchTodo(todoId),
-  });
 
   const { removeNoteDraft } = useNoteStorage({
     id: todoId,
@@ -53,13 +53,7 @@ export default function NoteCreationForm({ todoId }: NoteCreationFormProps) {
   };
 
   return (
-    <NoteForm
-      id={todoId}
-      methods={methods}
-      onSubmit={handleSubmit}
-      goal={data?.goal?.title}
-      todo={data?.title}
-    >
+    <NoteForm id={todoId} methods={methods} onSubmit={handleSubmit}>
       <input {...methods.register("todoId", { value: todoId })} type="hidden" />
     </NoteForm>
   );
