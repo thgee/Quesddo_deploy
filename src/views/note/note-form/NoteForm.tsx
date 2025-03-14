@@ -1,6 +1,12 @@
 import { useRouter } from "next/router";
 import { PropsWithChildren, useState } from "react";
-import { FormProvider, type Path, type UseFormReturn } from "react-hook-form";
+import {
+  type FieldValues,
+  FormProvider,
+  type Path,
+  type SubmitHandler,
+  type UseFormReturn,
+} from "react-hook-form";
 
 import Button from "@/components/atoms/button/Button";
 import ExitBtn from "@/components/atoms/exit-btn/ExitBtn";
@@ -8,7 +14,6 @@ import PageTitle from "@/components/atoms/page-title/PageTitle";
 import Popup from "@/components/molecules/popup/Popup";
 import { useAutoSaveNoteDraft } from "@/hooks/note/useAutoSaveNoteDraft";
 import { useBlockNavigation } from "@/hooks/note/useBlockNavigation";
-import { CreateNoteBodyDto, UpdateNoteBodyDto } from "@/types/types";
 import EmbeddedContent from "@/views/note/note-detail/components/EmbeddedContent";
 import DraftNoteReminderToast from "@/views/note/note-form/components/DraftNoteReminderToast";
 import Editor from "@/views/note/note-form/components/Editor";
@@ -18,29 +23,28 @@ import EditorTextCounter from "./components/EditorTextCounter";
 import GoalTodoDisplay from "./components/GoalTodoDisplay";
 import LinkDisplay from "./components/LinkDisplay";
 import LinkModal from "./components/LinkModal";
+import { isEmptyNote } from "./utils/checkEmptyNote";
 
-interface NoteFormProps<TNoteBody extends CreateNoteBodyDto | UpdateNoteBodyDto>
-  extends PropsWithChildren {
+interface NoteFormProps<T extends FieldValues> extends PropsWithChildren {
   id: number;
-  methods: UseFormReturn<TNoteBody>;
+  methods: UseFormReturn<T>;
   editMode?: boolean;
-  onSubmit: (data: TNoteBody) => void;
+  onSubmit: SubmitHandler<T>;
   goal?: string;
   todo?: string;
 }
 
-export default function NoteForm<
-  TNoteBody extends CreateNoteBodyDto | UpdateNoteBodyDto,
->({
+export default function NoteForm<T extends FieldValues>({
   id,
   methods,
   onSubmit,
   editMode = false,
   children,
-}: NoteFormProps<TNoteBody>) {
+}: NoteFormProps<T>) {
   const router = useRouter();
 
   const {
+    getValues,
     formState: { isValid, isSubmitSuccessful },
   } = methods;
 
@@ -50,14 +54,28 @@ export default function NoteForm<
     isEditMode: editMode,
   });
 
+  const [title, plainContent, linkUrl] = getValues([
+    "title",
+    "plainContent",
+    "linkUrl",
+  ] as Path<T>[]);
+
+  const isNoteDirty = !isEmptyNote({
+    title,
+    plainContent,
+    linkUrl,
+  });
+
   const { isPopupOpen, handleCanclePopup, handleConfirmPopup } =
     useBlockNavigation({
-      isPageMoveRestricted: !isSubmitSuccessful,
+      isPageMoveRestricted:
+        // (1. 제출되지 않음 상태) + [(2. 수정 모드) or (3. 빈 노트가 아닌 경우)]
+        !isSubmitSuccessful && (editMode || isNoteDirty),
     });
 
   const [isEmbedOpen, setIsEmbedOpen] = useState(false);
 
-  const linkUrl = methods.watch("linkUrl" as Path<TNoteBody>)?.toString();
+  const wacthedLinkUrl = methods.watch("linkUrl" as Path<T>)?.toString();
 
   const handleToggleEmbedOpen = () => {
     setIsEmbedOpen((prev) => !prev);
@@ -70,7 +88,7 @@ export default function NoteForm<
           <ExitBtn onClick={router.back} className="self-end" />
 
           {/* 링크 embed 영역 (링크가 존재할 경우만 표시) */}
-          <EmbeddedContent isOpen={isEmbedOpen} linkUrl={linkUrl} />
+          <EmbeddedContent isOpen={isEmbedOpen} linkUrl={wacthedLinkUrl} />
 
           <FormProvider {...methods}>
             <form
@@ -125,7 +143,7 @@ export default function NoteForm<
           isCancelEnabled
         >
           <p>정말 나가시겠어요?</p>
-          <p>작성된 내용이 모두 삭제됩니다.</p>
+          <p>{!editMode ? "작성" : "수정"}된 내용이 모두 삭제됩니다.</p>
         </Popup>
       )}
     </>
